@@ -267,5 +267,151 @@ int deleteadmin()
 
 int deletecustomer()
 {
-    
+    cout<<"\n\t\t\t\tEnter serial no. of the food item which is to be deleted: ";
+    int num;
+    cin>>num;
+    node* temp=headc;
+    while(temp!= NULL)
+    {
+        if(temp->data == NULL)
+        {
+            headc = del(num, headc, tailc);
+            return 1;
+        }
+        temp= temp->next;
+    }
+    return 0;
+}
+
+// This function displays the total bill of food items ordered by customer
+
+void displaybill()
+{
+    displayList(headc);
+    node*temp = headc;
+    float total_price = 0;
+    while(temp!= NULL)
+    {
+        total_price+= (temp->quantity)*(temp->price);
+        temp = temp->next;
+    }
+    cout<<"\t\t\t\t\t\t\t\tTotal price: "<<total_price;
+
+}
+
+// This function performs the task of deleting entire Linked List.
+
+node*deleteList(node* head)
+{
+    if(head == NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        node*n,*temp= head;
+        while(temp!=NULL)
+        {
+            n = temp->next;
+            delete temp;
+            temp = n;
+        }
+        head = NULL;
+    }
+    return head;
+}
+
+
+// This function opens up the admin section and provides its interface and functionalities
+
+void admin()
+{
+    cout<<"\n\t\t\t\t\t-------------------------------------\n";
+    cout<<"\t\t\t\t\t\t   ADMIN SECTION\n";
+    cout<<"\t\t\t\t\t\t-------------------------------------\n";
+    while(1)
+    {
+        adminmenu();  // prints admin functionality list
+
+        int opt;
+        cin>>opt;
+        if(opt == 5)
+        break;
+        switch(opt) // switch-case block which executes according to the option selected by user
+        {
+            case 1:
+            displayList(head_s);
+            break;
+            case 2:
+            cout<<"\n\t\t\t\t\t\t\tEnter serial no.of the food item: ";
+            int num, flag = 0;
+            char name[50];
+            float price;
+            cin>>num;
+            node*temp = heada;
+            while(temp!= NULL)
+            {
+                if(temp->data == num)
+                {
+                    cout<<"\n\t\t\t\t\tFood item with given serial number already exists!!\n\n";
+                    flag = 1;
+                    break;
+                }
+                temp = temp->next;
+            }
+            if(flag == 1)
+            {
+                break;
+
+            }
+            cout<<"\t\t\t\t\t\tEnter food item name: ";
+            cin>>name;
+            cout<<"\t\t\t\t\t\tEnter price: ";
+            cin>> price;
+            heada = createadmin(heada, num,name,price);
+            cout<<"\n\t\t\t\t\t\t\t\tNew food item added to the linked list!!\n\n";
+            break;
+            case 3:
+            if(deleteadmin())
+            {
+                cout<<"\n\t\t\t\t\t\t\tUpdated list of food items menu \n";
+                displayList(heada);
+            }
+            else
+            {
+                cout<<"\n\t\t\t\t\tFood item with given serial number doesn't exist!\n\n";
+
+            }
+            break;
+            case 4:
+            cout<<"\n\t\t\t\t\t\t Order menu \n";
+            displayList(heada);
+            break;
+            default:
+            cout<<"\n\t\t\t\t\t\tWrong Input!! Please choose valid option\n";
+            break;
+
+        }
+    }
+
+}
+
+// This function opens upt the customer section and provides its interfaceand functionalities
+
+void customer()
+{
+    int flag = 0,j = 1;
+    char ch;
+    cout<<"\n\t\t\t\t\t\t-----------------------------------\n";
+    cout<<"\t\t\t\t\t\t\t\t\t CUSTOMER SECTION\n";
+    cout<<"\t\t\t\t\t\t\t-----------------------------------\n";
+    while(1)
+    {
+        
+       case 1:
+       displayList(heada);
+       cout<<"\n\t\t\t\t\t\t\t\tEnter number corresponding to the item you want to order: " ;
+       int n;
+
+    }
 }
