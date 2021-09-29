@@ -190,4 +190,82 @@ void displayList(node*head)
 
  // This function performs task of calculating total sales for each customer
 
- void
+ void calculatetotsales()
+ {
+     node*temp = headc;
+     while(temp!= NULL)
+     {
+         head_s = totalsales(temp->data,temp->quantity);
+         temp = temp->next;
+     }
+ }
+
+ //This function performs the task of deleting the data from
+ // Linked list whose respective head pointer is passed
+ // Here, data to be deleted is passed as a parameter
+
+node* del(int data, node*head,node*tail)
+{
+    if(head == NULL)
+    {
+        cout<<"\n\t\t\t\t\t\t\t\tList is empty\n";
+    }
+    else
+    {
+        node*temp;
+        if(data== head->data)
+        {
+            temp = head;
+            head = head-> next;
+            delete temp;
+        }
+        else if(data== tail->data)
+        {
+            temp = tail;
+            tail->next = NULL;
+            delete temp;
+
+        }
+        else
+        {
+            temp = head;
+            node*temp1 = temp;
+            while(data!= temp->data)
+            {
+                temp1 = temp;
+                temp = temp->next;
+            }
+            temp1->next = temp->next;
+            delete temp;
+        }
+    }
+    return head;
+} 
+
+// This function performs the task of deleting foo ditem from admin's Linked list.
+
+int deleteadmin()
+{
+    cout<<"\n\t\t\t\t\t\tEnter serial no. of the food item which is to be deleted: ";
+    int num;
+    cin>>num;
+    node*temp = heada;
+    while(temp!= NULL)
+    {
+        if(temp->data == num)
+        {
+            heada = del(num, heada, taila);
+            return 1;
+        }
+        temp = temp->next;
+    }
+    return 0;
+}
+
+// This function performs the task of deleting food item from 
+// customer's Linked list i.e customer's ordered food item
+
+int deletecustomer()
+{
+    
+}
