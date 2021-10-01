@@ -425,65 +425,75 @@ void customer()
             if (deletecustomer())
             {
                 cout << "\n\t\t\t\t\t Updated list of your ordered food items\n";
-            display:
-                ist(headc);
+            displayList(headc);
             }
             else
                 cout << "\n\t\t\t\t\t\t\tFood item with given serial number doesn't exist!!\n";
             break;
         case 4:
             calculatetotsales();
-            cout<<"\n\t\t\t\t\t\t\t Final Bill\n";
+            cout << "\n\t\t\t\t\t\t\t Final Bill\n";
             displaybill();
             headc = deleteList(headc);
-            cout<<"\n\t\t\t\t\t\t\t\tPress any key to return to main menu:\n\t\t\t\t\t\t";
+            cout << "\n\t\t\t\t\t\t\t\tPress any key to return to main menu:\n\t\t\t\t\t\t";
             fflush(stdin);
             ch = fgetc(stdin);
             flag = 1;
             break;
         default:
-        cout<<"\n\t\t\t\t\t\t Wrong input!!! Please choose valid option\n";
-        break;
+            cout << "\n\t\t\t\t\t\t Wrong input!!! Please choose valid option\n";
+            break;
         }
-        if(flag == 1)
-        break;
+        if (flag == 1)
+            break;
     }
 }
 
 // This function prints the welcome interface and opens the main menu where you can select the option where you want to go.
 void mainmenu()
 {
-    cout<<"\n**************************************************************\n";
-    cout<<"\n  WELCOME TO RESTAURANT MANAGEMENT SYSTEM\n";
-    cout<<"\n***********************************************************\n\n\n";
-    cout<<"\t\t\t\t\t\t\t\t\t1. ADMIN SECTION---->\n";
-    cout<<"\t\t\t\t\t\t\t\t\t2. CUSTOMER SECTION---->\n";
-    cout<<"\t\t\t\t\t\t\t\t\t3. EXIT--->\n\n";
-    cout<<"\t\t\t\t\t\t\t\tEnter Your Choice---->";
-
+    cout << "\n**************************************************************\n";
+    cout << "\n  WELCOME TO RESTAURANT MANAGEMENT SYSTEM\n";
+    cout << "\n***********************************************************\n\n\n";
+    cout << "\t\t\t\t\t\t\t\t\t1. ADMIN SECTION---->\n";
+    cout << "\t\t\t\t\t\t\t\t\t2. CUSTOMER SECTION---->\n";
+    cout << "\t\t\t\t\t\t\t\t\t3. EXIT--->\n\n";
+    cout << "\t\t\t\t\t\t\t\tEnter Your Choice---->";
 }
 
 int main() // From here the actual program execution begins
 {
     // Here we have initialized admin's Linked List i.e. Food Menu with 5 items
-    heada = createadmin(heada, 1, "Hot and Sour Soup",100);
-    heada = createadmin(heada, 2,"Manchow Soup", 200);
-    heada = createadmin(heada,3,"Manchurian Noodles", 150);
-    heada = createadmin(heada,4,"Fried Rice",100);
-    heada = createadmin(heada,5, "Makkka Noodles",80);
-    while(1)
+    heada = createadmin(heada, 1, "Hot and Sour Soup", 100);
+    heada = createadmin(heada, 2, "Manchow Soup", 200);
+    heada = createadmin(heada, 3, "Manchurian Noodles", 150);
+    heada = createadmin(heada, 4, "Fried Rice", 100);
+    heada = createadmin(heada, 5, "Makkka Noodles", 80);
+    while (1)
     {
         mainmenu();
         int choice;
-        cin>>choice;
-        if(choice == 3)
+        cin >> choice;
+        if (choice == 3)
         {
-            cout<<"\n\n\t\t\t\t\t\t\t**********Thank You!!***************\n";
+            cout << "\n\n\t\t\t\t\t\t\t**********Thank You!!***************\n";
             break;
         }
 
         //switch case block which executes according to the option selected by user
-        switch
+        switch (choice)
+        {
+        case 1:
+            admin();
+            break;
+        case 2:
+            customer();
+            break;
+        case 3:
+            break;
+        default:
+            cout << "\n\t\t\t\t\t\t\t\t\t Wrong Input !! Please choose valid option\n";
+            break;
+        }
     }
-
 }
