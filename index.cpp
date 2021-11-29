@@ -1,8 +1,8 @@
 // Program to implement "Linked List" to perform various tasks.
 
-#include <iostream>
-// #include<stdlib.h>
-#include <cstring>
+#include<iostream>
+
+#include<cstring>
 
 using namespace std;
 struct node
@@ -48,29 +48,36 @@ void customermenu()
 // This function creates a node for admin's linked list
 
 node *createadmin(node *head, int data, char foodname[30], float price)
+// node *createadmin(node *head, int data, string foodname, float price)
 {
+    
     newnode = new node;
     newnode->data = data;
     newnode->price = price;
     newnode->quantity = 0;
     strcpy(newnode->foodname, foodname);
     newnode->next = NULL;
-
     node *temp = head;
 
-    if (temp = NULL)
+    if (temp!= NULL)
     {
-        heada = taila = newnode;
-    }
-    else
-    {
+        
         while (temp->next != NULL)
         {
             temp = temp->next;
         }
         temp->next = newnode;
         taila = newnode;
+
+    
     }
+    else
+    {
+    
+        heada = taila = newnode;
+    }
+    
+    
     return heada;
 }
 
@@ -110,7 +117,7 @@ node *createcustomer(node *head, int data, int quantity)
     }
     else
     {
-        cout << "\n\t\t\t\t\t\tThis item is not present int the menu\n";
+        cout << "\n\t\t\t\t\t\tThis item is not present in the menu\n";
     }
     return headc;
 }
@@ -120,7 +127,7 @@ node *createcustomer(node *head, int data, int quantity)
 void displayList(node *head)
 {
     node *temp1 = head;
-    if (temp1 == head)
+    if (temp1 == NULL)
     {
         cout << "\n\t\t\t\t\t\t\t\t List is empty!!\n\n";
     }
@@ -218,12 +225,7 @@ node *del(int data, node *head, node *tail)
             head = head->next;
             delete temp;
         }
-        else if (data == tail->data)
-        {
-            temp = tail;
-            tail->next = NULL;
-            delete temp;
-        }
+        
         else
         {
             temp = head;
@@ -234,6 +236,8 @@ node *del(int data, node *head, node *tail)
                 temp = temp->next;
             }
             temp1->next = temp->next;
+            if(temp == tail)
+            tail = temp1;
             delete temp;
         }
     }
@@ -271,7 +275,7 @@ int deletecustomer()
     node *temp = headc;
     while (temp != NULL)
     {
-        if (temp->data == NULL)
+        if (!temp->data)
         {
             headc = del(num, headc, tailc);
             return 1;
@@ -339,7 +343,7 @@ void admin()
             displayList(head_s);
             break;
         case 2:
-            cout << "\n\t\t\t\t\t\t\tEnter serial no.of the food item: ";
+           { cout << "\n\t\t\t\t\t\t\tEnter serial no.of the food item: ";
             int num, flag = 0;
             char name[50];
             float price;
@@ -360,12 +364,14 @@ void admin()
                 break;
             }
             cout << "\t\t\t\t\t\tEnter food item name: ";
-            cin >> name;
+            cin.ignore();
+            cin.getline(name,50);
             cout << "\t\t\t\t\t\tEnter price: ";
             cin >> price;
             heada = createadmin(heada, num, name, price);
             cout << "\n\t\t\t\t\t\t\t\tNew food item added to the linked list!!\n\n";
             break;
+           }
         case 3:
             if (deleteadmin())
             {
@@ -463,17 +469,27 @@ void mainmenu()
 
 int main() // From here the actual program execution begins
 {
+    
+
     // Here we have initialized admin's Linked List i.e. Food Menu with 5 items
-    heada = createadmin(heada, 1, "Hot and Sour Soup", 100);
-    heada = createadmin(heada, 2, "Manchow Soup", 200);
-    heada = createadmin(heada, 3, "Manchurian Noodles", 150);
-    heada = createadmin(heada, 4, "Fried Rice", 100);
-    heada = createadmin(heada, 5, "Makkka Noodles", 80);
-    while (1)
+    char item[5][30] = {"Hot and Sour Soup","Manchow Soup","Manchurian Noodles","Fried Rice","Makkka Noodles"};
+    heada = createadmin(heada, 1, item[0], 100.0);
+    // cout<<"main starts here";
+    heada = createadmin(heada, 2, item[1], 200.0);
+    heada = createadmin(heada, 3, item[2], 150.0);
+    heada = createadmin(heada, 4, item[3], 100.0);
+    heada = createadmin(heada, 5, item[4], 80.0);
+    // heada = createadmin(heada, 1, "Hot and Sour Soup", 100);
+    // heada = createadmin(heada, 2, "Manchow Soup", 200);
+    // heada = createadmin(heada, 3, "Manchurian Noodles", 150);
+    // heada = createadmin(heada, 4, "Fried Rice", 100);
+    // heada = createadmin(heada, 5, "Makkka Noodles", 80);
+    
+    while(1)
     {
         mainmenu();
         int choice;
-        cin >> choice;
+        cin>>choice;
         if (choice == 3)
         {
             cout << "\n\n\t\t\t\t\t\t\t**********Thank You!!***************\n";
