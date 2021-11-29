@@ -25,24 +25,24 @@ node *head_s;
 
 void adminmenu()
 {
-    cout << "\n\t\t\t\t\t\t\t1. View total sales\n";
-    cout << "\t\t\t\t\t\t\t2. Add new items in the order menu\n";
-    cout << "\t\t\t\t\t\t\t3. Delete items from the order menu\n";
-    cout << "\t\t\t\t\t\t\t4. Display order menu\n";
-    cout << "\t\t\t\t\t\t\t5. Back to main menu\n\n";
-    cout << "\t\t\t\t\t\t\t6. Enter your choice--->";
+    cout << "\n\t\t\t1. View total sales\n";
+    cout << "\t\t\t2. Add new items in the order menu\n";
+    cout << "\t\t\t3. Delete items from the order menu\n";
+    cout << "\t\t\t4. Display order menu\n";
+    cout << "\t\t\t5. Back to main menu\n\n";
+    cout << "\t\t\t6. Enter your choice--->";
 }
 
 // This function prints the option for customers to choose
 
 void customermenu()
 {
-    cout << "\n\t\t\t\t\t\t\t1. Place your order\n";
-    cout << "\t\t\t\t\t\t\t2. View your ordered items\n";
-    cout << "\t\t\t\t\t\t\t3. Delete an item from order\n";
-    cout << "\t\t\t\t\t\t\t4. Display your Bill\n";
-    cout << "\t\t\t\t\t\t\t5. Back to main menu\n\n";
-    cout << "\t\t\t\t\t\t\t6. Enter your choice--->";
+    cout << "\n\t\t\t1. Place your order\n";
+    cout << "\t\t\t2. View your ordered items\n";
+    cout << "\t\t\t3. Delete an item from order\n";
+    cout << "\t\t\t4. Display your Bill\n";
+    cout << "\t\t\t5. Back to main menu\n\n";
+    cout << "\t\t\t6. Enter your choice--->";
 }
 
 // This function creates a node for admin's linked list
@@ -117,7 +117,7 @@ node *createcustomer(node *head, int data, int quantity)
     }
     else
     {
-        cout << "\n\t\t\t\t\t\tThis item is not present in the menu\n";
+        cout << "\n\t\t\tThis item is not present in the menu\n";
     }
     return headc;
 }
@@ -129,7 +129,7 @@ void displayList(node *head)
     node *temp1 = head;
     if (temp1 == NULL)
     {
-        cout << "\n\t\t\t\t\t\t\t\t List is empty!!\n\n";
+        cout << "\n\t\t\t List is empty!!\n\n";
     }
     else
     {
@@ -137,12 +137,17 @@ void displayList(node *head)
         while (temp1 != NULL)
         {
             if (temp1->quantity == 0)
-                cout << "\t\t\t\t\t\t\t\t\t\n"
-                     << temp1->data << temp1->foodname << temp1->price;
+               { cout << "\t\t\t\n"
+                     << "Serial no."<<"\t" << "Item name" <<"\t\t"<< "Price";
+                cout << "\t\t\t\n"
+                     << temp1->data<<"\t\t" << temp1->foodname <<"\t"<< temp1->price;
+               }
             else
             {
-                cout << "\t\t\t\t\t\t\t\t\n"
-                     << temp1->data << temp1->foodname << temp1->quantity << temp1->price;
+                cout << "\t\t\t\n"
+                     << "Serial no."<<"\t" << "Item name" <<"\t\t"<< "Quantity\tPrice";
+                cout << "\t\t\t\n"
+                     << temp1->data <<"\t\t" << temp1->foodname <<"\t" << temp1->quantity <<"\t\t" << temp1->price;
             }
             temp1 = temp1->next;
         }
@@ -214,7 +219,7 @@ node *del(int data, node *head, node *tail)
 {
     if (head == NULL)
     {
-        cout << "\n\t\t\t\t\t\t\t\tList is empty\n";
+        cout << "\n\t\t\tList is empty\n";
     }
     else
     {
@@ -248,7 +253,7 @@ node *del(int data, node *head, node *tail)
 
 int deleteadmin()
 {
-    cout << "\n\t\t\t\t\t\tEnter serial no. of the food item which is to be deleted: ";
+    cout << "\n\t\t\tEnter serial no. of the food item which is to be deleted: ";
     int num;
     cin >> num;
     node *temp = heada;
@@ -275,7 +280,8 @@ int deletecustomer()
     node *temp = headc;
     while (temp != NULL)
     {
-        if (!temp->data)
+        
+        if (temp->data==num)
         {
             headc = del(num, headc, tailc);
             return 1;
@@ -297,7 +303,7 @@ void displaybill()
         total_price += (temp->quantity) * (temp->price);
         temp = temp->next;
     }
-    cout << "\t\t\t\t\t\t\t\tTotal price: " << total_price;
+    cout << "\t\t\tTotal price: " << total_price;
 }
 
 // This function performs the task of deleting entire Linked List.
@@ -326,9 +332,9 @@ node *deleteList(node *head)
 
 void admin()
 {
-    cout << "\n\t\t\t\t\t-------------------------------------\n";
-    cout << "\t\t\t\t\t\t   ADMIN SECTION\n";
-    cout << "\t\t\t\t\t\t-------------------------------------\n";
+    cout << "\n\t\t\t-----------------------------------------------------\n";
+    cout << "\t\t\t\t\t   ADMIN SECTION\n";
+    cout << "\t\t\t-----------------------------------------------------\n";
     while (1)
     {
         adminmenu(); // prints admin functionality list
@@ -343,7 +349,7 @@ void admin()
             displayList(head_s);
             break;
         case 2:
-           { cout << "\n\t\t\t\t\t\t\tEnter serial no.of the food item: ";
+           { cout << "\n\t\t\tEnter serial no.of the food item: ";
             int num, flag = 0;
             char name[50];
             float price;
@@ -353,7 +359,7 @@ void admin()
             {
                 if (temp->data == num)
                 {
-                    cout << "\n\t\t\t\t\tFood item with given serial number already exists!!\n\n";
+                    cout << "\n\t\t\tFood item with given serial number already exists!!\n\n";
                     flag = 1;
                     break;
                 }
@@ -363,32 +369,32 @@ void admin()
             {
                 break;
             }
-            cout << "\t\t\t\t\t\tEnter food item name: ";
+            cout << "\t\t\tEnter food item name: ";
             cin.ignore();
             cin.getline(name,50);
-            cout << "\t\t\t\t\t\tEnter price: ";
+            cout << "\t\t\tEnter price: ";
             cin >> price;
             heada = createadmin(heada, num, name, price);
-            cout << "\n\t\t\t\t\t\t\t\tNew food item added to the linked list!!\n\n";
+            cout << "\n\t\t\tNew food item added to the linked list!!\n\n";
             break;
            }
         case 3:
             if (deleteadmin())
             {
-                cout << "\n\t\t\t\t\t\t\tUpdated list of food items menu \n";
+                cout << "\n\t\t\tUpdated list of food items menu \n";
                 displayList(heada);
             }
             else
             {
-                cout << "\n\t\t\t\t\tFood item with given serial number doesn't exist!\n\n";
+                cout << "\n\t\t\tFood item with given serial number doesn't exist!\n\n";
             }
             break;
         case 4:
-            cout << "\n\t\t\t\t\t\t Order menu \n";
+            cout << "\n\t\t\t Order menu \n";
             displayList(heada);
             break;
         default:
-            cout << "\n\t\t\t\t\t\tWrong Input!! Please choose valid option\n";
+            cout << "\n\t\t\tWrong Input!! Please choose valid option\n";
             break;
         }
     }
@@ -400,9 +406,9 @@ void customer()
 {
     int flag = 0, j = 1;
     char ch;
-    cout << "\n\t\t\t\t\t\t-----------------------------------\n";
-    cout << "\t\t\t\t\t\t\t\t\t CUSTOMER SECTION\n";
-    cout << "\t\t\t\t\t\t\t-----------------------------------\n";
+    cout << "\n\t\t\t-----------------------------------------------------\n";
+    cout << "\t\t\t\t\t CUSTOMER SECTION\n";
+    cout << "\t\t\t-----------------------------------------------------\n";
     while (1)
     {
         customermenu();
@@ -415,39 +421,39 @@ void customer()
         {
         case 1:
             displayList(heada);
-            cout << "\n\t\t\t\t\t\t\t\tEnter number corresponding to the item you want to order: ";
+            cout << "\n\t\t\tEnter number corresponding to the item you want to order: ";
             int n;
             cin >> n;
-            cout << "\t\t\t\t\t\t\t\t Enter quantity: ";
+            cout << "\t\t\t Enter quantity: ";
             int quantity;
             cin >> quantity;
             headc = createcustomer(headc, n, quantity);
             break;
         case 2:
-            cout << "\n\t\t\t\t\t List of ordered items \n";
+            cout << "\n\t\t\t List of ordered items \n";
             displayList(headc);
             break;
         case 3:
             if (deletecustomer())
             {
-                cout << "\n\t\t\t\t\t Updated list of your ordered food items\n";
+                cout << "\n\t\t\t Updated list of your ordered food items\n";
             displayList(headc);
             }
             else
-                cout << "\n\t\t\t\t\t\t\tFood item with given serial number doesn't exist!!\n";
+                cout << "\n\t\t\tFood item with given serial number doesn't exist!!\n";
             break;
         case 4:
             calculatetotsales();
-            cout << "\n\t\t\t\t\t\t\t Final Bill\n";
+            cout << "\n\t\t\t Final Bill\n";
             displaybill();
             headc = deleteList(headc);
-            cout << "\n\t\t\t\t\t\t\t\tPress any key to return to main menu:\n\t\t\t\t\t\t";
+            cout << "\n\t\t\tPress any key to return to main menu:\n\t\t\t\t\t\t";
             fflush(stdin);
             ch = fgetc(stdin);
             flag = 1;
             break;
         default:
-            cout << "\n\t\t\t\t\t\t Wrong input!!! Please choose valid option\n";
+            cout << "\n\t\t\t Wrong input!!! Please choose valid option\n";
             break;
         }
         if (flag == 1)
@@ -458,13 +464,13 @@ void customer()
 // This function prints the welcome interface and opens the main menu where you can select the option where you want to go.
 void mainmenu()
 {
-    cout << "\n**************************************************************\n";
-    cout << "\n  WELCOME TO RESTAURANT MANAGEMENT SYSTEM\n";
-    cout << "\n***********************************************************\n\n\n";
-    cout << "\t\t\t\t\t\t\t\t\t1. ADMIN SECTION---->\n";
-    cout << "\t\t\t\t\t\t\t\t\t2. CUSTOMER SECTION---->\n";
-    cout << "\t\t\t\t\t\t\t\t\t3. EXIT--->\n\n";
-    cout << "\t\t\t\t\t\t\t\tEnter Your Choice---->";
+    cout << "\n***************************************************************************************\n";
+    cout << "\n\t\t\tWELCOME TO OUR RESTAURANT :)\n";
+    cout << "\n***************************************************************************************\n\n\n";
+    cout << "\t\t\t\t\t1. ADMIN SECTION---->\n";
+    cout << "\t\t\t\t\t2. CUSTOMER SECTION---->\n";
+    cout << "\t\t\t\t\t3. EXIT--->\n\n";
+    cout << "\t\t\t\t\tEnter Your Choice---->";
 }
 
 int main() // From here the actual program execution begins
@@ -492,7 +498,7 @@ int main() // From here the actual program execution begins
         cin>>choice;
         if (choice == 3)
         {
-            cout << "\n\n\t\t\t\t\t\t\t**********Thank You!!***************\n";
+            cout << "\n\n\t\t\t**********Thank You!!***************\n";
             break;
         }
 
