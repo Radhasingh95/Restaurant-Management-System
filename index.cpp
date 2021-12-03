@@ -1,10 +1,7 @@
-// Program to implement "Linked List" to perform various tasks.
-
 #include<iostream>
-
 #include<cstring>
-
 using namespace std;
+
 struct node
 {
     char foodname[30];
@@ -14,15 +11,15 @@ struct node
     struct node *next;
 };
 
-// Global struct pointers which are used throughout
-// the program to create  linked list and maintain it.
-
+/* 
+Global struct pointers which are used throughout
+the program to create  linked list and maintain it.
+*/
 node *headc = NULL, *newnode, *tailc = NULL;
 node *heada = NULL, *taila = NULL;
 node *head_s;
 
 // This function prints the options available for admin to choose
-
 void adminmenu()
 {
     cout << "\n\t\t\t1. View total sales\n";
@@ -34,7 +31,6 @@ void adminmenu()
 }
 
 // This function prints the option for customers to choose
-
 void customermenu()
 {
     cout << "\n\t\t\t1. Place your order\n";
@@ -45,12 +41,9 @@ void customermenu()
     cout << "\t\t\t6. Enter your choice--->";
 }
 
-// This function creates a node for admin's linked list
-
+// This function creates a node for food's list
 node *createadmin(node *head, int data, char foodname[30], float price)
-// node *createadmin(node *head, int data, string foodname, float price)
-{
-    
+{    
     newnode = new node;
     newnode->data = data;
     newnode->price = price;
@@ -58,31 +51,23 @@ node *createadmin(node *head, int data, char foodname[30], float price)
     strcpy(newnode->foodname, foodname);
     newnode->next = NULL;
     node *temp = head;
-
     if (temp!= NULL)
-    {
-        
+    {        
         while (temp->next != NULL)
         {
             temp = temp->next;
         }
         temp->next = newnode;
-        taila = newnode;
-
-    
+        taila = newnode;    
     }
     else
-    {
-    
+    {    
         heada = taila = newnode;
-    }
-    
-    
+    }     
     return heada;
 }
 
-// This function creates a node for customer's linked list
-
+// This function creates a node for customer's order list
 node *createcustomer(node *head, int data, int quantity)
 {
     newnode = new node;
@@ -122,8 +107,7 @@ node *createcustomer(node *head, int data, int quantity)
     return headc;
 }
 
-// This function displays the respective entire linked list whose head pointer is passed to it
-
+// This function displays the respective entire linked list whose head pointer is passed to it.
 void displayList(node *head)
 {
     node *temp1 = head;
@@ -154,10 +138,12 @@ void displayList(node *head)
         cout << "\n";
     }
 }
-// This function maintains the total value of sales done by
-// maintaining another Linked List which keeps a track of
-// Total sales made to each customer  represented by each node
 
+
+/* This function maintains the total value of sales done by
+ maintaining another Linked List which keeps a track of
+ Total sales made to each customer  represented by each node
+*/
 node *totalsales(int data, int quantity)
 {
     newnode = new node;
@@ -200,7 +186,6 @@ node *totalsales(int data, int quantity)
 }
 
 // This function performs task of calculating total sales for each customer
-
 void calculatetotsales()
 {
     node *temp = headc;
@@ -211,10 +196,10 @@ void calculatetotsales()
     }
 }
 
-//This function performs the task of deleting the data from
-// Linked list whose respective head pointer is passed
-// Here, data to be deleted is passed as a parameter
-
+/*This function performs the task of deleting the data from
+ Linked list whose respective head pointer is passed
+ Here, data to be deleted is passed as a parameter
+*/
 node *del(int data, node *head, node *tail)
 {
     if (head == NULL)
@@ -229,8 +214,7 @@ node *del(int data, node *head, node *tail)
             temp = head;
             head = head->next;
             delete temp;
-        }
-        
+        }        
         else
         {
             temp = head;
@@ -249,8 +233,7 @@ node *del(int data, node *head, node *tail)
     return head;
 }
 
-// This function performs the task of deleting foo ditem from admin's Linked list.
-
+// This function performs the task of deleting food item from admin's Linked list.
 int deleteadmin()
 {
     cout << "\n\t\t\tEnter serial no. of the food item which is to be deleted: ";
@@ -269,9 +252,8 @@ int deleteadmin()
     return 0;
 }
 
-// This function performs the task of deleting food item from
-// customer's Linked list i.e customer's ordered food item
-
+/* This function performs the task of deleting food item from
+ customer's Linked list i.e customer's ordered food item*/
 int deletecustomer()
 {
     cout << "\n\t\t\t\tEnter serial no. of the food item which is to be deleted: ";
@@ -292,7 +274,6 @@ int deletecustomer()
 }
 
 // This function displays the total bill of food items ordered by customer
-
 void displaybill()
 {
     displayList(headc);
@@ -307,7 +288,6 @@ void displaybill()
 }
 
 // This function performs the task of deleting entire Linked List.
-
 node *deleteList(node *head)
 {
     if (head == NULL)
@@ -329,7 +309,6 @@ node *deleteList(node *head)
 }
 
 // This function opens up the admin section and provides its interface and functionalities
-
 void admin()
 {
     cout << "\n\t\t\t-----------------------------------------------------\n";
@@ -400,8 +379,7 @@ void admin()
     }
 }
 
-// This function opens upt the customer section and provides its interfaceand functionalities
-
+// This function opens up the customer section and provides its interface and functionalities
 void customer()
 {
     int flag = 0, j = 1;
@@ -461,7 +439,7 @@ void customer()
     }
 }
 
-// This function prints the welcome interface and opens the main menu where you can select the option where you want to go.
+// This function prints the welcome interface and opens the main menu where user can select the option where you want to go.
 void mainmenu()
 {
     cout << "\n***************************************************************************************\n";
@@ -475,22 +453,13 @@ void mainmenu()
 
 int main() // From here the actual program execution begins
 {
-    
-
-    // Here we have initialized admin's Linked List i.e. Food Menu with 5 items
+    // Here I have initialized admin's Linked List i.e. Food Menu with 5 items
     char item[5][30] = {"Hot and Sour Soup","Manchow Soup","Manchurian Noodles","Fried Rice","Makkka Noodles"};
     heada = createadmin(heada, 1, item[0], 100.0);
-    // cout<<"main starts here";
     heada = createadmin(heada, 2, item[1], 200.0);
     heada = createadmin(heada, 3, item[2], 150.0);
     heada = createadmin(heada, 4, item[3], 100.0);
-    heada = createadmin(heada, 5, item[4], 80.0);
-    // heada = createadmin(heada, 1, "Hot and Sour Soup", 100);
-    // heada = createadmin(heada, 2, "Manchow Soup", 200);
-    // heada = createadmin(heada, 3, "Manchurian Noodles", 150);
-    // heada = createadmin(heada, 4, "Fried Rice", 100);
-    // heada = createadmin(heada, 5, "Makkka Noodles", 80);
-    
+    heada = createadmin(heada, 5, item[4], 80.0);    
     while(1)
     {
         mainmenu();
